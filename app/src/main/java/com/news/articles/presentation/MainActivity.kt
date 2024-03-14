@@ -10,8 +10,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.news.articles.presentation.screens.HomeScreen
 import com.news.articles.presentation.screens.MyTopAppBar
+import com.news.articles.presentation.screens.RecentScreen
+import com.news.articles.presentation.viewmodel.RecentNewsViewModel
 import com.news.articles.ui.theme.NewsArticlesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +36,10 @@ class MainActivity : ComponentActivity() {
                                 .padding(top = it.calculateTopPadding())
                                 .fillMaxSize()
                         ) {
-                            HomeScreen()
+                            val viewModel = hiltViewModel<RecentNewsViewModel>()
+                            val recentNews = viewModel.recentNewsPagingFlow.collectAsLazyPagingItems()
+                            RecentScreen(recentNews = recentNews)
+//                            HomeScreen()
                         }
                     }
                 }

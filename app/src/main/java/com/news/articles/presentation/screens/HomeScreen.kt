@@ -45,9 +45,9 @@ import com.news.articles.domain.model.Article
 import com.news.articles.presentation.viewmodel.NewsViewModel
 import com.news.articles.ui.theme.Shapes
 
-
 @Composable
 fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
+
     val res = viewModel.articles.value
     if (res.isLoading) {
         Box(modifier = Modifier.fillMaxSize())
@@ -68,6 +68,7 @@ fun HomeScreen(viewModel: NewsViewModel = hiltViewModel()) {
         }
     }
 }
+
 
 @Composable
 fun ArticleItem(article: Article) {
