@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,8 +43,9 @@ fun RecentScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(recentNews.itemSnapshotList.items) { recentArticle ->
-                    ArticleItem(recentArticle)
+                items(count = recentNews.itemCount) { index ->
+                    val recentArticle = recentNews[index]
+                    recentArticle?.let { ArticleItem(recentArticle) }
                 }
                 item {
                     if (recentNews.loadState.append is LoadState.Loading) {

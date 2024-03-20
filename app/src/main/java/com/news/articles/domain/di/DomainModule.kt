@@ -11,6 +11,7 @@ import com.news.articles.data.network.ApiService
 import com.news.articles.data.network.RecentArticlesRemoteMediator
 import com.news.articles.data.repository.GetNewsArticleRepoImpl
 import com.news.articles.domain.repository.GetNewsArticleRepo
+import com.news.articles.utils.Constant
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,7 +40,7 @@ object DomainModule {
     @Singleton
     fun provideArticlePager(articleDb: ArticlesDatabase, apiService: ApiService): Pager<Int, RecentArticle> {
         return Pager(
-            config = PagingConfig(pageSize = 5),
+            config = PagingConfig(pageSize = Constant.QUERY_PAGE_SIZE),
             remoteMediator = RecentArticlesRemoteMediator(
                 apiService,
                 articleDb
